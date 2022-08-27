@@ -11,7 +11,7 @@ function Main() {
   );
 
   const refetch = useCallback(() => {
-    loadQuery({ query: text });
+    loadQuery({ query: text, cursor: null, first: 10 });
   }, [text]);
 
   function handleChangeText(event: ChangeEvent<HTMLInputElement>) {
