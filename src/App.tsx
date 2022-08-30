@@ -1,12 +1,12 @@
 import React from "react";
 import { RelayEnvironmentProvider } from "react-relay";
 
-import Home from "./pages/Home/Home";
-import RelayEnvironment from "./RelayEnvironment";
+import Home from "./pages/home/Home";
+import relayEnvironment from "./relayEnvironment";
 
 function App() {
   return (
-    <RelayEnvironmentProvider environment={RelayEnvironment}>
+    <RelayEnvironmentProvider environment={relayEnvironment}>
       <Home />
     </RelayEnvironmentProvider>
   );
