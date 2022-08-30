@@ -21,11 +21,7 @@ function SearchResults({ initialQueryReference }: Props) {
     initialQueryReference
   );
 
-  return (
-    <>
-      <RepositoryList query={data} />
-    </>
-  );
+  return <RepositoryList query={data} />;
 }
 
 export default SearchResults;

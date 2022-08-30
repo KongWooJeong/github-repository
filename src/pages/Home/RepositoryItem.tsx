@@ -1,5 +1,5 @@
 import React from "react";
-import { useFragment, useMutation } from "react-relay";
+import { useFragment } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 
 import styled from "styled-components";
@@ -38,7 +38,6 @@ function RepositoryItem({ repo }: Props) {
 
   const [commitAddStarMutation, isAddStarMutationInFlight] =
     useAddStartMutation();
-
   const [commitRemoveStarMutation, isRemoveStarMutationInFlight] =
     useRemoveStarMutation();
 
@@ -67,7 +66,8 @@ function RepositoryItem({ repo }: Props) {
         textColor={data.viewerHasStarred ? "#fafbfc" : "#0366d6"}
         text={`⭐️ ${data.stargazerCount}`}
         onClick={handleStarButtonClick}
-        isDisabled={data.viewerHasStarred}
+        type="button"
+        isDisabled={isAddStarMutationInFlight || isRemoveStarMutationInFlight}
       />
     </RepositoryItemWrapper>
   );

@@ -8,37 +8,20 @@ import {
 
 import { RepositoryList_query$key } from "./__generated__/RepositoryList_query.graphql";
 
-import RepositoryItem_repository from "./__generated__/RepositoryItem_repository.graphql";
-
 import { graphql } from "babel-plugin-relay/macro";
 
 import RepositoryItem from "./RepositoryItem";
 
 import styled from "styled-components";
+import Button from "../../components/Button";
+
 const RepositoryListWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  .add-button {
-    display: inline-block;
-    /* outline: 0; */
-    height: 60px;
-    cursor: pointer;
-    padding: 5px 16px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    border: 1px solid;
-    border-radius: 6px;
-    color: #0366d6;
-    background-color: #fafbfc;
-    border-color: #1b1f2326;
-    :hover {
-      color: #ffffff;
-      background-color: #0366d6;
-      border-color: #1b1f2326;
-    }
+  .add-repository-button-container {
+    margin-top: 30px;
   }
 `;
 
@@ -68,21 +51,24 @@ function RepositoryList({ query }: Props) {
   );
 
   return (
-    <RepositoryListWrapper>
-      {data?.search?.edges?.map((edge: any) => {
-        return edge.node ? (
-          <RepositoryItem key={edge.cursor} repo={edge.node} />
-        ) : null;
-      })}
-      <button
-        className="add-button"
-        onClick={() => {
-          loadNext(10);
-        }}
-      >
-        더보기
-      </button>
-    </RepositoryListWrapper>
+    <>
+      <RepositoryListWrapper>
+        {data?.search?.edges?.map((edge: any) => {
+          return edge.node ? (
+            <RepositoryItem key={edge.cursor} repo={edge.node} />
+          ) : null;
+        })}
+
+        <div className="add-repository-button-container">
+          <Button
+            text="더보기"
+            onClick={() => {
+              loadNext(10);
+            }}
+          />
+        </div>
+      </RepositoryListWrapper>
+    </>
   );
 }
 

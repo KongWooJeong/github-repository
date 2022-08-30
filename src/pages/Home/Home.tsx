@@ -17,11 +17,53 @@ import SearchResultsQuery, {
 import TextInput from "../../components/TextInput";
 
 import styled from "styled-components";
+import Button from "../../components/Button";
+
+function Home() {
+  const [text, setText] = useState<string>("");
+  const [queryRef, loadQuery] =
+    useQueryLoader<SearchResultsQueryType>(SearchResultsQuery);
+
+  const refetch = useCallback(() => {
+    loadQuery({ query: text, cursor: null, first: 10 });
+  }, [text]);
+
+  function handleChangeText(event: ChangeEvent<HTMLInputElement>) {
+    setText(event.target.value);
+  }
+
+  function handleSearchInputSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    refetch();
+    setText("");
+  }
+
+  return (
+    <HomeWrapper>
+      <div className="search-form-container">
+        <form onSubmit={handleSearchInputSubmit}>
+          <TextInput type="text" value={text} onChange={handleChangeText} />
+          <Button type="submit" text="검색" />
+        </form>
+      </div>
+      <div className="search-results-container">
+        <ErrorBoundary
+          fallbackRender={({ error }) => <div>{error.message}</div>}
+        >
+          <Suspense fallback={<LoaderSpinner />}>
+            {queryRef && <SearchResults initialQueryReference={queryRef} />}
+          </Suspense>
+        </ErrorBoundary>
+      </div>
+    </HomeWrapper>
+  );
+}
 
 const HomeWrapper = styled.div`
   background-color: #f7fafc;
 
-  .search-input-container {
+  .search-form-container {
     display: flex;
     justify-content: center;
   }
@@ -53,48 +95,5 @@ const HomeWrapper = styled.div`
     }
   }
 `;
-
-function Home() {
-  const [text, setText] = useState<string>("");
-  const [queryRef, loadQuery] =
-    useQueryLoader<SearchResultsQueryType>(SearchResultsQuery);
-
-  const refetch = useCallback(() => {
-    loadQuery({ query: text, cursor: null, first: 10 });
-  }, [text]);
-
-  function handleChangeText(event: ChangeEvent<HTMLInputElement>) {
-    setText(event.target.value);
-  }
-
-  function handleSearchInputSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    refetch();
-    setText("");
-  }
-
-  return (
-    <HomeWrapper>
-      <div className="search-input-container">
-        <form onSubmit={handleSearchInputSubmit}>
-          <TextInput type="text" value={text} onChange={handleChangeText} />
-          <button type="submit" className="button">
-            검색
-          </button>
-        </form>
-      </div>
-      <div className="search-results-container">
-        <ErrorBoundary
-          fallbackRender={({ error }) => <div>{error.message}</div>}
-        >
-          <Suspense fallback={<LoaderSpinner />}>
-            {queryRef && <SearchResults initialQueryReference={queryRef} />}
-          </Suspense>
-        </ErrorBoundary>
-      </div>
-    </HomeWrapper>
-  );
-}
 
 export default Home;
