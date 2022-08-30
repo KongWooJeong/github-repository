@@ -3,8 +3,8 @@ import { graphql } from "babel-plugin-relay/macro";
 
 function useAddStartMutation() {
   const mutationData = useMutation(graphql`
-    mutation useAddStarMutation($reposutoryId: ID!) {
-      addStar(input: { starrableId: $reposutoryId }) {
+    mutation useAddStarMutation($repositoryId: ID!) {
+      addStar(input: { starrableId: $repositoryId }) {
         starrable {
           stargazerCount
           viewerHasStarred
@@ -12,7 +12,6 @@ function useAddStartMutation() {
       }
     }
   `);
-
   return mutationData;
 }
 

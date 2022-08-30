@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<d36381f2f225d7763655c26395117d75>>
+ * @generated SignedSource<<9ee7b429124a6d794ef84b1c5c0a2391>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,12 +10,11 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type useRemoveStarMutation$variables = {
-  repoId: string;
+  repositoryId: string;
 };
 export type useRemoveStarMutation$data = {
   readonly removeStar: {
     readonly starrable: {
-      readonly id: string;
       readonly stargazerCount: number;
       readonly viewerHasStarred: boolean;
     } | null;
@@ -31,7 +30,7 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "repoId"
+    "name": "repositoryId"
   }
 ],
 v1 = [
@@ -40,7 +39,7 @@ v1 = [
       {
         "kind": "Variable",
         "name": "starrableId",
-        "variableName": "repoId"
+        "variableName": "repositoryId"
       }
     ],
     "kind": "ObjectValue",
@@ -51,17 +50,10 @@ v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-},
-v3 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
   "name": "stargazerCount",
   "storageKey": null
 },
-v4 = {
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -92,8 +84,7 @@ return {
             "plural": false,
             "selections": [
               (v2/*: any*/),
-              (v3/*: any*/),
-              (v4/*: any*/)
+              (v3/*: any*/)
             ],
             "storageKey": null
           }
@@ -135,7 +126,13 @@ return {
               },
               (v2/*: any*/),
               (v3/*: any*/),
-              (v4/*: any*/)
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "id",
+                "storageKey": null
+              }
             ],
             "storageKey": null
           }
@@ -145,16 +142,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "5583199016876942159ed480258d239a",
+    "cacheID": "37fee2a6cf2fff82b9ff8938f764561b",
     "id": null,
     "metadata": {},
     "name": "useRemoveStarMutation",
     "operationKind": "mutation",
-    "text": "mutation useRemoveStarMutation(\n  $repoId: ID!\n) {\n  removeStar(input: {starrableId: $repoId}) {\n    starrable {\n      __typename\n      id\n      stargazerCount\n      viewerHasStarred\n    }\n  }\n}\n"
+    "text": "mutation useRemoveStarMutation(\n  $repositoryId: ID!\n) {\n  removeStar(input: {starrableId: $repositoryId}) {\n    starrable {\n      __typename\n      stargazerCount\n      viewerHasStarred\n      id\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "809e081eab2408d5558d8bcec60563cb";
+(node as any).hash = "b5e1a6f843889d8508c16d46e50a67b6";
 
 export default node;

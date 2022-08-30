@@ -44,13 +44,13 @@ function RepositoryItem({ repo }: Props) {
     if (data.viewerHasStarred) {
       commitRemoveStarMutation({
         variables: {
-          repoId: data.id,
+          repositoryId: data.id,
         },
       });
     } else {
       commitAddStarMutation({
         variables: {
-          repoId: data.id,
+          repositoryId: data.id,
         },
       });
     }

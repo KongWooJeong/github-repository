@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<281cbfac1e441c0b3e4f408cf7983786>>
+ * @generated SignedSource<<3d128114d14127dd9b6ab609bd2c9023>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,12 +10,11 @@
 
 import { ConcreteRequest, Mutation } from 'relay-runtime';
 export type useAddStarMutation$variables = {
-  repoId: string;
+  repositoryId: string;
 };
 export type useAddStarMutation$data = {
   readonly addStar: {
     readonly starrable: {
-      readonly id: string;
       readonly stargazerCount: number;
       readonly viewerHasStarred: boolean;
     } | null;
@@ -31,7 +30,7 @@ var v0 = [
   {
     "defaultValue": null,
     "kind": "LocalArgument",
-    "name": "repoId"
+    "name": "repositoryId"
   }
 ],
 v1 = [
@@ -40,7 +39,7 @@ v1 = [
       {
         "kind": "Variable",
         "name": "starrableId",
-        "variableName": "repoId"
+        "variableName": "repositoryId"
       }
     ],
     "kind": "ObjectValue",
@@ -51,17 +50,10 @@ v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
-  "name": "id",
-  "storageKey": null
-},
-v3 = {
-  "alias": null,
-  "args": null,
-  "kind": "ScalarField",
   "name": "stargazerCount",
   "storageKey": null
 },
-v4 = {
+v3 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -92,8 +84,7 @@ return {
             "plural": false,
             "selections": [
               (v2/*: any*/),
-              (v3/*: any*/),
-              (v4/*: any*/)
+              (v3/*: any*/)
             ],
             "storageKey": null
           }
@@ -135,7 +126,13 @@ return {
               },
               (v2/*: any*/),
               (v3/*: any*/),
-              (v4/*: any*/)
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "id",
+                "storageKey": null
+              }
             ],
             "storageKey": null
           }
@@ -145,16 +142,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "33585346b96876be1ecd03e215de147d",
+    "cacheID": "77527be6d7aa28ec4a3d32d720a2d12a",
     "id": null,
     "metadata": {},
     "name": "useAddStarMutation",
     "operationKind": "mutation",
-    "text": "mutation useAddStarMutation(\n  $repoId: ID!\n) {\n  addStar(input: {starrableId: $repoId}) {\n    starrable {\n      __typename\n      id\n      stargazerCount\n      viewerHasStarred\n    }\n  }\n}\n"
+    "text": "mutation useAddStarMutation(\n  $repositoryId: ID!\n) {\n  addStar(input: {starrableId: $repositoryId}) {\n    starrable {\n      __typename\n      stargazerCount\n      viewerHasStarred\n      id\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "a4294dda16e18ad380ff268f261fab97";
+(node as any).hash = "b46171e095de88697cd00ec913ce7c74";
 
 export default node;
