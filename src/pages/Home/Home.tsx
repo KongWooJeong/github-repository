@@ -7,17 +7,17 @@ import React, {
 } from "react";
 import { useQueryLoader } from "react-relay";
 import { ErrorBoundary } from "react-error-boundary";
-import SearchResults from "./SearchResults";
+import styled from "styled-components";
+
+import SearchResult from "./SearchResult";
 import LoaderSpinner from "../../components/LoaderSpinner";
+import TextInput from "../../components/TextInput";
+import Button from "../../components/Button";
+import ErrorBox from "../../components/ErrorBox";
 
 import SearchResultsQuery, {
   SearchResultsQuery as SearchResultsQueryType,
 } from "./__generated__/SearchResultsQuery.graphql";
-
-import TextInput from "../../components/TextInput";
-
-import styled from "styled-components";
-import Button from "../../components/Button";
 
 function Home() {
   const [text, setText] = useState<string>("");
@@ -49,10 +49,10 @@ function Home() {
       </div>
       <div className="search-results-container">
         <ErrorBoundary
-          fallbackRender={({ error }) => <div>{error.message}</div>}
+          fallbackRender={({ error }) => <ErrorBox message={error.message} />}
         >
           <Suspense fallback={<LoaderSpinner />}>
-            {queryRef && <SearchResults initialQueryReference={queryRef} />}
+            {queryRef && <SearchResult initialQueryReference={queryRef} />}
           </Suspense>
         </ErrorBoundary>
       </div>

@@ -1,18 +1,18 @@
 import styled from "styled-components";
 
 const TextInput = styled.input`
-  background-color: #f7fafc;
-  color: lightgray;
   height: 52px;
-  font-weight: 500;
-  font-size: 30px;
-  border-radius: 1px;
-  outline: none;
   border: 0 none;
-  border-bottom: 2px solid lightgray;
+  border-bottom: 2px solid #d3d3d3;
+  border-radius: 1px;
+  font-size: 30px;
+  font-weight: 500;
+  outline: none;
+  color: #d3d3d3;
+  background-color: #f7fafc;
 
   :focus {
-    border-bottom-color: skyblue;
+    border-bottom-color: #87ceeb;
   }
 `;
 

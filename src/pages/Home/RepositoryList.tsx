@@ -1,19 +1,16 @@
 import React from "react";
 import { usePaginationFragment } from "react-relay";
+import { graphql } from "babel-plugin-relay/macro";
+import styled from "styled-components";
+
+import RepositoryItem from "./RepositoryItem";
+import Button from "../../components/Button";
 
 import {
   SearchResultsQuery$data,
   SearchResultsQuery as SearchResultsQueryType,
 } from "./__generated__/SearchResultsQuery.graphql";
-
 import { RepositoryList_query$key } from "./__generated__/RepositoryList_query.graphql";
-
-import { graphql } from "babel-plugin-relay/macro";
-
-import RepositoryItem from "./RepositoryItem";
-
-import styled from "styled-components";
-import Button from "../../components/Button";
 
 const RepositoryListWrapper = styled.div`
   display: flex;
@@ -50,25 +47,21 @@ function RepositoryList({ query }: Props) {
     query
   );
 
-  return (
-    <>
-      <RepositoryListWrapper>
-        {data?.search?.edges?.map((edge: any) => {
-          return edge.node ? (
-            <RepositoryItem key={edge.cursor} repo={edge.node} />
-          ) : null;
-        })}
+  function handleAddRepositoryListButtonClick() {
+    loadNext(10);
+  }
 
-        <div className="add-repository-button-container">
-          <Button
-            text="더보기"
-            onClick={() => {
-              loadNext(10);
-            }}
-          />
-        </div>
-      </RepositoryListWrapper>
-    </>
+  return (
+    <RepositoryListWrapper>
+      {data?.search?.edges?.map((edge: any) => {
+        return edge.node ? (
+          <RepositoryItem key={edge.cursor} repo={edge.node} />
+        ) : null;
+      })}
+      <div className="add-repository-button-container">
+        <Button text="더보기" onClick={handleAddRepositoryListButtonClick} />
+      </div>
+    </RepositoryListWrapper>
   );
 }
 

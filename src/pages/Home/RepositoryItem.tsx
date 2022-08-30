@@ -1,14 +1,13 @@
 import React from "react";
 import { useFragment } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
-
 import styled from "styled-components";
-
-import { RepositoryItem_repository$key } from "./__generated__/RepositoryItem_repository.graphql";
 
 import Button from "../../components/Button";
 import useAddStartMutation from "../../hooks/useAddStarMutation";
 import useRemoveStarMutation from "../../hooks/useRemoveStarMutation";
+
+import { RepositoryItem_repository$key } from "./__generated__/RepositoryItem_repository.graphql";
 
 interface Props {
   repo: RepositoryItem_repository$key;

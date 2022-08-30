@@ -1,20 +1,19 @@
 import React from "react";
 import { usePreloadedQuery, PreloadedQuery } from "react-relay";
-
-import { SearchResultsQuery as SearchResultsQueryType } from "./__generated__/SearchResultsQuery.graphql";
+import { graphql } from "babel-plugin-relay/macro";
 
 import RepositoryList from "./RepositoryList";
 
-import { graphql } from "babel-plugin-relay/macro";
+import { SearchResultsQuery as SearchResultsQueryType } from "./__generated__/SearchResultsQuery.graphql";
 
 interface Props {
   initialQueryReference: PreloadedQuery<SearchResultsQueryType>;
 }
 
-function SearchResults({ initialQueryReference }: Props) {
+function SearchResult({ initialQueryReference }: Props) {
   const data = usePreloadedQuery(
     graphql`
-      query SearchResultsQuery($query: String!, $cursor: String, $first: Int) {
+      query SearchResultQuery($query: String!, $cursor: String, $first: Int) {
         ...RepositoryList_query
       }
     `,
@@ -24,4 +23,4 @@ function SearchResults({ initialQueryReference }: Props) {
   return <RepositoryList query={data} />;
 }
 
-export default SearchResults;
+export default SearchResult;

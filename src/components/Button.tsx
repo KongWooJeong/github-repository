@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  backgroundColor?: string;
-  textColor?: string;
   text: string | number;
-  onClick?: () => void;
   isDisabled?: boolean;
   type?: "button" | "submit" | "reset";
+  onClick?: () => void;
+  textColor?: string;
+  backgroundColor?: string;
 }
 
 interface StyleProps {
@@ -16,12 +16,12 @@ interface StyleProps {
 }
 
 function Button({
-  backgroundColor,
-  textColor,
   text,
-  onClick,
   isDisabled,
   type,
+  onClick,
+  backgroundColor,
+  textColor,
 }: Props) {
   return (
     <ButtonWrapper textColor={textColor} backgroundColor={backgroundColor}>
@@ -37,18 +37,18 @@ const ButtonWrapper = styled.div<StyleProps>`
 
   button {
     display: inline-block;
-    outline: 0;
-    cursor: pointer;
+    border: 1px solid;
+    border-radius: 6px;
     padding: 5px 16px;
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
-    border: 1px solid;
-    border-radius: 6px;
+    cursor: pointer;
     color: ${({ textColor }) => (textColor ? textColor : "#0366d6")};
     background-color: ${({ backgroundColor }) =>
       backgroundColor ? backgroundColor : "#ffffff"};
     border-color: #1b1f2326;
+
     :hover {
       color: #ffffff;
       background-color: #0366d6;
