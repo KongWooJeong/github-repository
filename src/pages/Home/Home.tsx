@@ -8,6 +8,7 @@ import React, {
 import { useQueryLoader } from "react-relay";
 import { ErrorBoundary } from "react-error-boundary";
 import SearchResults from "./SearchResults";
+import LoaderSpinner from "../../components/LoaderSpinner";
 
 import SearchResultsQuery, {
   SearchResultsQuery as SearchResultsQueryType,
@@ -87,7 +88,7 @@ function Home() {
         <ErrorBoundary
           fallbackRender={({ error }) => <div>{error.message}</div>}
         >
-          <Suspense fallback={<div>Loading</div>}>
+          <Suspense fallback={<LoaderSpinner />}>
             {queryRef && <SearchResults initialQueryReference={queryRef} />}
           </Suspense>
         </ErrorBoundary>
