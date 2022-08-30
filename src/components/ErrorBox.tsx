@@ -1,6 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
+interface Props {
+  message: string;
+}
+
+function ErrorBox({ message }: Props) {
+  return (
+    <ErrorWrapper>
+      <p className="error-title">Error 발생가 발생되었습니다.</p>
+      <p className="error-message">{message}</p>
+    </ErrorWrapper>
+  );
+}
+
 const ErrorWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,18 +29,5 @@ const ErrorWrapper = styled.div`
     font-size: 30px;
   }
 `;
-
-interface Props {
-  message: string;
-}
-
-function ErrorBox({ message }: Props) {
-  return (
-    <ErrorWrapper>
-      <p className="error-title">Error 발생가 발생되었습니다.</p>
-      <p className="error-message">{message}</p>
-    </ErrorWrapper>
-  );
-}
 
 export default ErrorBox;
