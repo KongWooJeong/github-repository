@@ -46,7 +46,11 @@ function Home() {
       >
         <div className="search-form-container">
           <form onSubmit={handleSearchInputSubmit}>
-            <TextInput type="text" onChange={handleInputTextChange} />
+            <TextInput
+              type="text"
+              value={searchText}
+              onChange={handleInputTextChange}
+            />
             <Button type="submit" text="검색" />
           </form>
         </div>
