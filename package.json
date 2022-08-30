@@ -55,7 +55,6 @@
   "devDependencies": {
     "@types/react-relay": "^14.1.1",
     "@types/relay-runtime": "^14.1.2",
-    "@types/relay-test-utils": "^14.1.0",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
     "babel-plugin-relay": "^14.1.0",
@@ -63,7 +62,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
-    "relay-compiler": "^14.1.0",
-    "relay-test-utils": "^14.1.0"
+    "relay-compiler": "^14.1.0"
   }
 }
