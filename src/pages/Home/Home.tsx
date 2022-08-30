@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useState, useCallback, Suspense } from "react";
+import React, {
+  FormEvent,
+  ChangeEvent,
+  useState,
+  useCallback,
+  Suspense,
+} from "react";
 import { useQueryLoader } from "react-relay";
 import { ErrorBoundary } from "react-error-boundary";
 import SearchResults from "./SearchResults";
@@ -60,21 +66,22 @@ function Home() {
     setText(event.target.value);
   }
 
+  function handleSearchInputSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    refetch();
+    setText("");
+  }
+
   return (
     <HomeWrapper>
       <div className="search-input-container">
-        <form>
+        <form onSubmit={handleSearchInputSubmit}>
           <TextInput type="text" value={text} onChange={handleChangeText} />
+          <button type="submit" className="button">
+            검색
+          </button>
         </form>
-        <button
-          className="button"
-          onClick={() => {
-            refetch();
-            setText("");
-          }}
-        >
-          검색
-        </button>
       </div>
       <div className="search-results-container">
         <ErrorBoundary
