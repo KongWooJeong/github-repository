@@ -1,10 +1,10 @@
 import { useMutation } from "react-relay";
 import { graphql } from "babel-plugin-relay/macro";
 
-import { useRemoveStarMutation } from "./__generated__/useRemoveStarMutation.graphql";
+import { useRemoveStarMutation as useRemoveStarMutationType } from "./__generated__/useRemoveStarMutation.graphql";
 
 function useRemoveStarMutation() {
-  const mutationData = useMutation<useRemoveStarMutation>(graphql`
+  const mutationData = useMutation<useRemoveStarMutationType>(graphql`
     mutation useRemoveStarMutation($repositoryId: ID!) {
       removeStar(input: { starrableId: $repositoryId }) {
         starrable {
