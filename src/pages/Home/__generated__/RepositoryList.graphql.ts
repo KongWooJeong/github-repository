@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<30afa6f989e92af8a06f6f74b45e39d4>>
+ * @generated SignedSource<<d7357db9bec2f50431d27a1e231b5f31>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,36 +10,38 @@
 
 import { ConcreteRequest, Query } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type SearchListQuery$variables = {
+export type RepositoryList$variables = {
   cursor?: string | null;
   first?: number | null;
   query: string;
 };
-export type SearchListQuery$data = {
-  readonly " $fragmentSpreads": FragmentRefs<"RepositoryList_Search">;
+export type RepositoryList$data = {
+  readonly " $fragmentSpreads": FragmentRefs<"RepositoryList_query">;
 };
-export type SearchListQuery = {
-  response: SearchListQuery$data;
-  variables: SearchListQuery$variables;
+export type RepositoryList = {
+  response: RepositoryList$data;
+  variables: RepositoryList$variables;
 };
 
 const node: ConcreteRequest = (function(){
-var v0 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "cursor"
-},
-v1 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "first"
-},
-v2 = {
-  "defaultValue": null,
-  "kind": "LocalArgument",
-  "name": "query"
-},
-v3 = [
+var v0 = [
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "cursor"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "first"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "query"
+  }
+],
+v1 = [
   {
     "kind": "Variable",
     "name": "after",
@@ -61,7 +63,7 @@ v3 = [
     "value": "REPOSITORY"
   }
 ],
-v4 = {
+v2 = {
   "alias": null,
   "args": null,
   "kind": "ScalarField",
@@ -70,19 +72,15 @@ v4 = {
 };
 return {
   "fragment": {
-    "argumentDefinitions": [
-      (v0/*: any*/),
-      (v1/*: any*/),
-      (v2/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "SearchListQuery",
+    "name": "RepositoryList",
     "selections": [
       {
         "args": null,
         "kind": "FragmentSpread",
-        "name": "RepositoryList_Search"
+        "name": "RepositoryList_query"
       }
     ],
     "type": "Query",
@@ -90,17 +88,13 @@ return {
   },
   "kind": "Request",
   "operation": {
-    "argumentDefinitions": [
-      (v2/*: any*/),
-      (v0/*: any*/),
-      (v1/*: any*/)
-    ],
+    "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "SearchListQuery",
+    "name": "RepositoryList",
     "selections": [
       {
         "alias": null,
-        "args": (v3/*: any*/),
+        "args": (v1/*: any*/),
         "concreteType": "SearchResultItemConnection",
         "kind": "LinkedField",
         "name": "search",
@@ -132,7 +126,7 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      (v4/*: any*/),
+                      (v2/*: any*/),
                       {
                         "alias": null,
                         "args": null,
@@ -153,6 +147,13 @@ return {
                         "kind": "ScalarField",
                         "name": "stargazerCount",
                         "storageKey": null
+                      },
+                      {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
+                        "name": "viewerHasStarred",
+                        "storageKey": null
                       }
                     ],
                     "type": "Repository",
@@ -161,7 +162,7 @@ return {
                   {
                     "kind": "InlineFragment",
                     "selections": [
-                      (v4/*: any*/)
+                      (v2/*: any*/)
                     ],
                     "type": "Node",
                     "abstractKey": "__isNode"
@@ -209,7 +210,7 @@ return {
       },
       {
         "alias": null,
-        "args": (v3/*: any*/),
+        "args": (v1/*: any*/),
         "filters": [
           "query",
           "type"
@@ -222,16 +223,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "aa41d0c0be4ed0b8c640f05b63e0165b",
+    "cacheID": "382e5447fd7e96f472860a9175ddde84",
     "id": null,
     "metadata": {},
-    "name": "SearchListQuery",
+    "name": "RepositoryList",
     "operationKind": "query",
-    "text": "query SearchListQuery(\n  $query: String!\n  $cursor: String\n  $first: Int\n) {\n  ...RepositoryList_Search\n}\n\nfragment RepositoryList_Search on Query {\n  search(query: $query, type: REPOSITORY, first: $first, after: $cursor) {\n    edges {\n      node {\n        __typename\n        ... on Repository {\n          id\n          name\n          description\n          stargazerCount\n        }\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query RepositoryList(\n  $cursor: String\n  $first: Int\n  $query: String!\n) {\n  ...RepositoryList_query\n}\n\nfragment RepositoryItem_repository on Repository {\n  id\n  name\n  description\n  stargazerCount\n  viewerHasStarred\n}\n\nfragment RepositoryList_query on Query {\n  search(query: $query, type: REPOSITORY, first: $first, after: $cursor) {\n    edges {\n      node {\n        __typename\n        ...RepositoryItem_repository\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "26f39d93c7ce5c795905bb7e3e92374f";
+(node as any).hash = "4a76841c0078b8ed67e3eafcd578a365";
 
 export default node;

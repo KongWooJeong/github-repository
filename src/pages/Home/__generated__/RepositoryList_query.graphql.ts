@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<28982915497540ce35c293ba1d284d6e>>
+ * @generated SignedSource<<24743986235b65c0db02f583d16f8c43>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -10,22 +10,19 @@
 
 import { ReaderFragment, RefetchableFragment } from 'relay-runtime';
 import { FragmentRefs } from "relay-runtime";
-export type RepositoryList_Search$data = {
+export type RepositoryList_query$data = {
   readonly search: {
     readonly edges: ReadonlyArray<{
       readonly node: {
-        readonly description?: string | null;
-        readonly id?: string;
-        readonly name?: string;
-        readonly stargazerCount?: number;
+        readonly " $fragmentSpreads": FragmentRefs<"RepositoryItem_repository">;
       } | null;
     } | null> | null;
   };
-  readonly " $fragmentType": "RepositoryList_Search";
+  readonly " $fragmentType": "RepositoryList_query";
 };
-export type RepositoryList_Search$key = {
-  readonly " $data"?: RepositoryList_Search$data;
-  readonly " $fragmentSpreads": FragmentRefs<"RepositoryList_Search">;
+export type RepositoryList_query$key = {
+  readonly " $data"?: RepositoryList_query$data;
+  readonly " $fragmentSpreads": FragmentRefs<"RepositoryList_query">;
 };
 
 const node: ReaderFragment = (function(){
@@ -67,10 +64,10 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./RepositoryListQuery.graphql')
+      "operation": require('./RepositoryList.graphql')
     }
   },
-  "name": "RepositoryList_Search",
+  "name": "RepositoryList_query",
   "selections": [
     {
       "alias": "search",
@@ -108,39 +105,9 @@ return {
               "plural": false,
               "selections": [
                 {
-                  "kind": "InlineFragment",
-                  "selections": [
-                    {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "id",
-                      "storageKey": null
-                    },
-                    {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "name",
-                      "storageKey": null
-                    },
-                    {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "description",
-                      "storageKey": null
-                    },
-                    {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "stargazerCount",
-                      "storageKey": null
-                    }
-                  ],
-                  "type": "Repository",
-                  "abstractKey": null
+                  "args": null,
+                  "kind": "FragmentSpread",
+                  "name": "RepositoryItem_repository"
                 },
                 {
                   "alias": null,
@@ -196,6 +163,6 @@ return {
 };
 })();
 
-(node as any).hash = "18a58cc957d1c7888f8927dc7c28a0de";
+(node as any).hash = "4a76841c0078b8ed67e3eafcd578a365";
 
 export default node;
