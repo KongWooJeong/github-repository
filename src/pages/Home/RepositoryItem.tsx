@@ -7,6 +7,8 @@ import styled from "styled-components";
 import { RepositoryItem_repository$key } from "./__generated__/RepositoryItem_repository.graphql";
 
 import Button from "../../components/Button";
+import useAddStartMutation from "../../hooks/useAddStarMutation";
+import useRemoveStarMutation from "../../hooks/useRemoveStarMutation";
 
 interface Props {
   repo: RepositoryItem_repository$key;
@@ -34,39 +36,21 @@ function RepositoryItem({ repo }: Props) {
     repo
   );
 
-  const [addcommitMutation, addisMutationInFlight] = useMutation(graphql`
-    mutation RepositoryItemMutation($repoId: ID!) {
-      addStar(input: { starrableId: $repoId }) {
-        starrable {
-          id
-          stargazerCount
-          viewerHasStarred
-        }
-      }
-    }
-  `);
+  const [commitAddStarMutation, isAddStarMutationInFlight] =
+    useAddStartMutation();
 
-  const [recommitMutation, reisMutationInFlight] = useMutation(graphql`
-    mutation RepositoryItemRemoveMutation($repoId: ID!) {
-      removeStar(input: { starrableId: $repoId }) {
-        starrable {
-          id
-          stargazerCount
-          viewerHasStarred
-        }
-      }
-    }
-  `);
+  const [commitRemoveStarMutation, isRemoveStarMutationInFlight] =
+    useRemoveStarMutation();
 
   function handleStarButtonClick() {
     if (data.viewerHasStarred) {
-      recommitMutation({
+      commitRemoveStarMutation({
         variables: {
           repoId: data.id,
         },
       });
     } else {
-      addcommitMutation({
+      commitAddStarMutation({
         variables: {
           repoId: data.id,
         },
