@@ -14,6 +14,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
+    "react-loader-spinner": "^5.3.3",
     "react-relay": "^14.1.0",
     "react-scripts": "5.0.1",
     "relay-runtime": "^14.1.0",
@@ -54,6 +55,7 @@
   "devDependencies": {
     "@types/react-relay": "^14.1.1",
     "@types/relay-runtime": "^14.1.2",
+    "@types/relay-test-utils": "^14.1.0",
     "@typescript-eslint/eslint-plugin": "^5.35.1",
     "@typescript-eslint/parser": "^5.35.1",
     "babel-plugin-relay": "^14.1.0",
@@ -61,6 +63,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
-    "relay-compiler": "^14.1.0"
+    "relay-compiler": "^14.1.0",
+    "relay-test-utils": "^14.1.0"
   }
 }
