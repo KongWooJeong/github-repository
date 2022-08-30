@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8450d6c8d69be4591f82c0b97e7b83df>>
+ * @generated SignedSource<<fe61731adfb89e6a1f59b071682de9e6>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -198,14 +198,14 @@ return {
                 "alias": null,
                 "args": null,
                 "kind": "ScalarField",
-                "name": "endCursor",
+                "name": "hasNextPage",
                 "storageKey": null
               },
               {
                 "alias": null,
                 "args": null,
                 "kind": "ScalarField",
-                "name": "hasNextPage",
+                "name": "endCursor",
                 "storageKey": null
               }
             ],
@@ -222,19 +222,19 @@ return {
           "type"
         ],
         "handle": "connection",
-        "key": "RepositoryList_search",
+        "key": "RepositoryItem_search",
         "kind": "LinkedHandle",
         "name": "search"
       }
     ]
   },
   "params": {
-    "cacheID": "e4b4a41f5eedbc4ca5848fbdd4f24b3c",
+    "cacheID": "7644b0d52ed41bbfa370df31584536cd",
     "id": null,
     "metadata": {},
     "name": "SearchResultQuery",
     "operationKind": "query",
-    "text": "query SearchResultQuery(\n  $query: String!\n  $cursor: String\n  $first: Int\n) {\n  ...RepositoryList_query\n}\n\nfragment RepositoryItem_repository on Repository {\n  id\n  name\n  description\n  stargazerCount\n  viewerHasStarred\n}\n\nfragment RepositoryList_query on Query {\n  search(query: $query, type: REPOSITORY, first: $first, after: $cursor) {\n    edges {\n      node {\n        __typename\n        ...RepositoryItem_repository\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query SearchResultQuery(\n  $query: String!\n  $cursor: String\n  $first: Int\n) {\n  ...RepositoryList_query\n}\n\nfragment RepositoryItem_repository on Repository {\n  id\n  name\n  description\n  stargazerCount\n  viewerHasStarred\n}\n\nfragment RepositoryList_query on Query {\n  search(query: $query, type: REPOSITORY, first: $first, after: $cursor) {\n    edges {\n      node {\n        __typename\n        ...RepositoryItem_repository\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      cursor\n    }\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n  }\n}\n"
   }
 };
 })();

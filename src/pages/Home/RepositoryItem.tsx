@@ -10,18 +10,10 @@ import useRemoveStarMutation from "../../hooks/useRemoveStarMutation";
 import { RepositoryItem_repository$key } from "./__generated__/RepositoryItem_repository.graphql";
 
 interface Props {
-  repo: RepositoryItem_repository$key;
+  fragmentReference: RepositoryItem_repository$key;
 }
 
-const RepositoryItemWrapper = styled.div`
-  width: 100%;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 10px 8px 0px rgb(191 219 254);
-`;
-
-function RepositoryItem({ repo }: Props) {
+function RepositoryItem({ fragmentReference }: Props) {
   const data = useFragment(
     graphql`
       fragment RepositoryItem_repository on Repository {
@@ -32,7 +24,7 @@ function RepositoryItem({ repo }: Props) {
         viewerHasStarred
       }
     `,
-    repo
+    fragmentReference
   );
 
   const [commitAddStarMutation, isAddStarMutationInFlight] =
@@ -71,5 +63,13 @@ function RepositoryItem({ repo }: Props) {
     </RepositoryItemWrapper>
   );
 }
+
+const RepositoryItemWrapper = styled.div`
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 10px 8px 0px rgb(191 219 254);
+`;
 
 export default RepositoryItem;

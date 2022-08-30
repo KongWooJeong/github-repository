@@ -4,10 +4,10 @@ import { graphql } from "babel-plugin-relay/macro";
 
 import RepositoryList from "./RepositoryList";
 
-import { SearchResultsQuery as SearchResultsQueryType } from "./__generated__/SearchResultsQuery.graphql";
+import { SearchResultQuery as SearchResultQueryType } from "./__generated__/SearchResultQuery.graphql";
 
 interface Props {
-  initialQueryReference: PreloadedQuery<SearchResultsQueryType>;
+  initialQueryReference: PreloadedQuery<SearchResultQueryType>;
 }
 
 function SearchResult({ initialQueryReference }: Props) {
@@ -20,7 +20,7 @@ function SearchResult({ initialQueryReference }: Props) {
     initialQueryReference
   );
 
-  return <RepositoryList query={data} />;
+  return <RepositoryList fragmentReference={data} />;
 }
 
 export default SearchResult;

@@ -7,10 +7,58 @@ import RepositoryItem from "./RepositoryItem";
 import Button from "../../components/Button";
 
 import {
-  SearchResultsQuery$data,
-  SearchResultsQuery as SearchResultsQueryType,
-} from "./__generated__/SearchResultsQuery.graphql";
+  SearchResultQuery$data,
+  SearchResultQuery as SearchResultsQueryType,
+} from "./__generated__/SearchResultQuery.graphql";
 import { RepositoryList_query$key } from "./__generated__/RepositoryList_query.graphql";
+
+interface Props {
+  fragmentReference: SearchResultQuery$data;
+}
+
+function RepositoryList({ fragmentReference }: Props) {
+  const { data, loadNext } = usePaginationFragment<
+    SearchResultsQueryType,
+    RepositoryList_query$key
+  >(
+    graphql`
+      fragment RepositoryList_query on Query
+      @refetchable(queryName: "RepositoryListQuery") {
+        search(query: $query, type: REPOSITORY, first: $first, after: $cursor)
+          @connection(key: "RepositoryItem_search") {
+          edges {
+            node {
+              ...RepositoryItem_repository
+            }
+          }
+          pageInfo {
+            hasNextPage
+          }
+        }
+      }
+    `,
+    fragmentReference
+  );
+
+  function handleAddRepositoryListButtonClick() {
+    loadNext(10);
+  }
+
+  return (
+    <RepositoryListWrapper>
+      {data.search.edges?.map((edge: any) => {
+        return edge?.node ? (
+          <RepositoryItem key={edge.cursor} fragmentReference={edge.node} />
+        ) : null;
+      })}
+      {data.search.pageInfo.hasNextPage && (
+        <div className="add-repository-button-container">
+          <Button text="더보기" onClick={handleAddRepositoryListButtonClick} />
+        </div>
+      )}
+    </RepositoryListWrapper>
+  );
+}
 
 const RepositoryListWrapper = styled.div`
   display: flex;
@@ -21,48 +69,5 @@ const RepositoryListWrapper = styled.div`
     margin-top: 30px;
   }
 `;
-
-interface Props {
-  query: SearchResultsQuery$data;
-}
-
-function RepositoryList({ query }: Props) {
-  const { data, loadNext } = usePaginationFragment<
-    SearchResultsQueryType,
-    RepositoryList_query$key
-  >(
-    graphql`
-      fragment RepositoryList_query on Query
-      @refetchable(queryName: "RepositoryList") {
-        search(query: $query, type: REPOSITORY, first: $first, after: $cursor)
-          @connection(key: "RepositoryList_search") {
-          edges {
-            node {
-              ...RepositoryItem_repository
-            }
-          }
-        }
-      }
-    `,
-    query
-  );
-
-  function handleAddRepositoryListButtonClick() {
-    loadNext(10);
-  }
-
-  return (
-    <RepositoryListWrapper>
-      {data?.search?.edges?.map((edge: any) => {
-        return edge.node ? (
-          <RepositoryItem key={edge.cursor} repo={edge.node} />
-        ) : null;
-      })}
-      <div className="add-repository-button-container">
-        <Button text="더보기" onClick={handleAddRepositoryListButtonClick} />
-      </div>
-    </RepositoryListWrapper>
-  );
-}
 
 export default RepositoryList;

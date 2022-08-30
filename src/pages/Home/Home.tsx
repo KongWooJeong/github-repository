@@ -15,20 +15,20 @@ import TextInput from "../../components/TextInput";
 import Button from "../../components/Button";
 import ErrorBox from "../../components/ErrorBox";
 
-import SearchResultsQuery, {
-  SearchResultsQuery as SearchResultsQueryType,
-} from "./__generated__/SearchResultsQuery.graphql";
+import SearchResultQuery, {
+  SearchResultQuery as SearchResultQueryType,
+} from "./__generated__/SearchResultQuery.graphql";
 
 function Home() {
   const [searchText, setSearchText] = useState<string>("");
-  const [queryRef, loadQuery] =
-    useQueryLoader<SearchResultsQueryType>(SearchResultsQuery);
+  const [searchResultQueryReference, loadSearchResultQuery] =
+    useQueryLoader<SearchResultQueryType>(SearchResultQuery);
 
   const refetch = useCallback(() => {
-    loadQuery({ query: searchText, first: 10 });
+    loadSearchResultQuery({ query: searchText, first: 10 });
   }, [searchText]);
 
-  function handleChangeText(event: ChangeEvent<HTMLInputElement>) {
+  function handleInputTextChange(event: ChangeEvent<HTMLInputElement>) {
     setSearchText(event.target.value);
   }
 
@@ -46,17 +46,17 @@ function Home() {
       >
         <div className="search-form-container">
           <form onSubmit={handleSearchInputSubmit}>
-            <TextInput
-              type="text"
-              value={searchText}
-              onChange={handleChangeText}
-            />
+            <TextInput type="text" onChange={handleInputTextChange} />
             <Button type="submit" text="검색" />
           </form>
         </div>
         <div className="search-results-container">
           <Suspense fallback={<LoaderSpinner />}>
-            {queryRef && <SearchResult initialQueryReference={queryRef} />}
+            {searchResultQueryReference && (
+              <SearchResult
+                initialQueryReference={searchResultQueryReference}
+              />
+            )}
           </Suspense>
         </div>
       </ErrorBoundary>

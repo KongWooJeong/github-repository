@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<24743986235b65c0db02f583d16f8c43>>
+ * @generated SignedSource<<1b1cbfde11425b54a138ec627e6a2e09>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -17,6 +17,9 @@ export type RepositoryList_query$data = {
         readonly " $fragmentSpreads": FragmentRefs<"RepositoryItem_repository">;
       } | null;
     } | null> | null;
+    readonly pageInfo: {
+      readonly hasNextPage: boolean;
+    };
   };
   readonly " $fragmentType": "RepositoryList_query";
 };
@@ -64,7 +67,7 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./RepositoryList.graphql')
+      "operation": require('./RepositoryListQuery.graphql')
     }
   },
   "name": "RepositoryList_query",
@@ -85,7 +88,7 @@ return {
       ],
       "concreteType": "SearchResultItemConnection",
       "kind": "LinkedField",
-      "name": "__RepositoryList_search_connection",
+      "name": "__RepositoryItem_search_connection",
       "plural": false,
       "selections": [
         {
@@ -141,14 +144,14 @@ return {
               "alias": null,
               "args": null,
               "kind": "ScalarField",
-              "name": "endCursor",
+              "name": "hasNextPage",
               "storageKey": null
             },
             {
               "alias": null,
               "args": null,
               "kind": "ScalarField",
-              "name": "hasNextPage",
+              "name": "endCursor",
               "storageKey": null
             }
           ],
@@ -163,6 +166,6 @@ return {
 };
 })();
 
-(node as any).hash = "4a76841c0078b8ed67e3eafcd578a365";
+(node as any).hash = "2f1c1912ed95c3ae0783b4f5776e23c8";
 
 export default node;
