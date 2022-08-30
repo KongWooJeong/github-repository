@@ -22,9 +22,9 @@ function SearchResults({ initialQueryReference }: Props) {
   );
 
   return (
-    <div>
+    <>
       <RepositoryList query={data} />
-    </div>
+    </>
   );
 }
 

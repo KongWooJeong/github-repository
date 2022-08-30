@@ -7,6 +7,46 @@ import SearchResultsQuery, {
   SearchResultsQuery as SearchResultsQueryType,
 } from "./__generated__/SearchResultsQuery.graphql";
 
+import TextInput from "../../components/TextInput";
+
+import styled from "styled-components";
+
+const HomeWrapper = styled.div`
+  background-color: #f7fafc;
+
+  .search-input-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .search-results-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 0px 70px;
+  }
+
+  .button {
+    display: inline-block;
+    outline: 0;
+    cursor: pointer;
+    padding: 5px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    border: 1px solid;
+    border-radius: 6px;
+    color: #0366d6;
+    background-color: #fafbfc;
+    border-color: #1b1f2326;
+    :hover {
+      color: #ffffff;
+      background-color: #0366d6;
+      border-color: #1b1f2326;
+    }
+  }
+`;
+
 function Home() {
   const [text, setText] = useState<string>("");
   const [queryRef, loadQuery] =
@@ -21,12 +61,13 @@ function Home() {
   }
 
   return (
-    <>
-      <div>
+    <HomeWrapper>
+      <div className="search-input-container">
         <form>
-          <input type="text" value={text} onChange={handleChangeText} />
+          <TextInput type="text" value={text} onChange={handleChangeText} />
         </form>
         <button
+          className="button"
           onClick={() => {
             refetch();
             setText("");
@@ -35,12 +76,16 @@ function Home() {
           검색
         </button>
       </div>
-      <ErrorBoundary fallbackRender={({ error }) => <div>{error.message}</div>}>
-        <Suspense fallback={<div>Loading</div>}>
-          {queryRef && <SearchResults initialQueryReference={queryRef} />}
-        </Suspense>
-      </ErrorBoundary>
-    </>
+      <div className="search-results-container">
+        <ErrorBoundary
+          fallbackRender={({ error }) => <div>{error.message}</div>}
+        >
+          <Suspense fallback={<div>Loading</div>}>
+            {queryRef && <SearchResults initialQueryReference={queryRef} />}
+          </Suspense>
+        </ErrorBoundary>
+      </div>
+    </HomeWrapper>
   );
 }
 
