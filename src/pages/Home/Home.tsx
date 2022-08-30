@@ -20,42 +20,46 @@ import SearchResultsQuery, {
 } from "./__generated__/SearchResultsQuery.graphql";
 
 function Home() {
-  const [text, setText] = useState<string>("");
+  const [searchText, setSearchText] = useState<string>("");
   const [queryRef, loadQuery] =
     useQueryLoader<SearchResultsQueryType>(SearchResultsQuery);
 
   const refetch = useCallback(() => {
-    loadQuery({ query: text, cursor: null, first: 10 });
-  }, [text]);
+    loadQuery({ query: searchText, first: 10 });
+  }, [searchText]);
 
   function handleChangeText(event: ChangeEvent<HTMLInputElement>) {
-    setText(event.target.value);
+    setSearchText(event.target.value);
   }
 
   function handleSearchInputSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     refetch();
-    setText("");
+    setSearchText("");
   }
 
   return (
     <HomeWrapper>
-      <div className="search-form-container">
-        <form onSubmit={handleSearchInputSubmit}>
-          <TextInput type="text" value={text} onChange={handleChangeText} />
-          <Button type="submit" text="검색" />
-        </form>
-      </div>
-      <div className="search-results-container">
-        <ErrorBoundary
-          fallbackRender={({ error }) => <ErrorBox message={error.message} />}
-        >
+      <ErrorBoundary
+        fallbackRender={({ error }) => <ErrorBox message={error.message} />}
+      >
+        <div className="search-form-container">
+          <form onSubmit={handleSearchInputSubmit}>
+            <TextInput
+              type="text"
+              value={searchText}
+              onChange={handleChangeText}
+            />
+            <Button type="submit" text="검색" />
+          </form>
+        </div>
+        <div className="search-results-container">
           <Suspense fallback={<LoaderSpinner />}>
             {queryRef && <SearchResult initialQueryReference={queryRef} />}
           </Suspense>
-        </ErrorBoundary>
-      </div>
+        </div>
+      </ErrorBoundary>
     </HomeWrapper>
   );
 }
@@ -73,26 +77,6 @@ const HomeWrapper = styled.div`
     flex-direction: column;
     margin: 10px;
     padding: 0px 70px;
-  }
-
-  .button {
-    display: inline-block;
-    outline: 0;
-    cursor: pointer;
-    padding: 5px 16px;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 20px;
-    border: 1px solid;
-    border-radius: 6px;
-    color: #0366d6;
-    background-color: #fafbfc;
-    border-color: #1b1f2326;
-    :hover {
-      color: #ffffff;
-      background-color: #0366d6;
-      border-color: #1b1f2326;
-    }
   }
 `;
 
