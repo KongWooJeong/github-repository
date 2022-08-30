@@ -2046,7 +2046,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-relay@*", "@types/react-relay@^14.1.1":
+"@types/react-relay@^14.1.1":
   version "14.1.1"
   resolved "https://registry.npmjs.org/@types/react-relay/-/react-relay-14.1.1.tgz"
   integrity sha512-uUXlJOjWmLF1awJGTSuolsCU3d9Qf7+YChBo/UvlX/neLaMYuAjHvzqB8EkafIOJtLi0AaKKvDL047rnoino2A==
@@ -2067,15 +2067,6 @@
   version "14.1.2"
   resolved "https://registry.npmjs.org/@types/relay-runtime/-/relay-runtime-14.1.2.tgz"
   integrity sha512-HeXlKlkGakGZtnViOk5lRn5ljjYqR+EvbJodt0hmwAp5YrWZ5kdXqzMWvAhlAUpGJtP7NkKwMMAsduy46S7UjA==
-
-"@types/relay-test-utils@^14.1.0":
-  version "14.1.0"
-  resolved "https://registry.yarnpkg.com/@types/relay-test-utils/-/relay-test-utils-14.1.0.tgz#6b0aa8b7491212dc35c84e335f1ee1ce612555df"
-  integrity sha512-qwt9JDaNFa3VNTYC5FKvDE38a3Blz8Pav95xvqhY2g2ECoz47G6oocVR6qySTNQ/1kp2rFvhGG4TtyThlQBh5A==
-  dependencies:
-    "@types/react" "*"
-    "@types/react-relay" "*"
-    "@types/relay-runtime" "*"
 
 "@types/resolve@1.17.1":
   version "1.17.1"
@@ -7752,16 +7743,6 @@ relay-runtime@14.1.0, relay-runtime@^14.1.0:
     "@babel/runtime" "^7.0.0"
     fbjs "^3.0.2"
     invariant "^2.2.4"
-
-relay-test-utils@^14.1.0:
-  version "14.1.0"
-  resolved "https://registry.yarnpkg.com/relay-test-utils/-/relay-test-utils-14.1.0.tgz#c61177fb101e883ded45dc8e25c5f5543d0fb7b4"
-  integrity sha512-4Ftqc+LnHyhqU2LNOtD/UEqqutFF9qJn+xqn+xfxgUGjU4X42vVhAN8KdG3q4KqE142EX0S8oPX5kA0FyFFiWg==
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    fbjs "^3.0.2"
-    invariant "^2.2.4"
-    relay-runtime "14.1.0"
 
 renderkid@^3.0.0:
   version "3.0.0"
